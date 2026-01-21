@@ -1,2 +1,0 @@
-Fix the integer type of the group DQ flags to be uint8 as indicated by the RAD
-schemas.

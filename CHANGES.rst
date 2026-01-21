@@ -1,3 +1,32 @@
+0.29.1 (2026-01-21)
+===================
+
+Bug Fixes
+---------
+
+- Fix the integer type of the group DQ flags to be uint8 as indicated by the
+  RAD
+  schemas. (`#616
+  <https://github.com/spacetelescope/roman_datamodels/issues/616>`_)
+
+
+New Features
+------------
+
+- Support patternProperties for create_minimal/fake_data/from_model. (`#591
+  <https://github.com/spacetelescope/roman_datamodels/issues/591>`_)
+- Add a new group DQ flag ("WFI18_TRANSIENT", value 2**7) for pixels affected
+  by the WFI18 transient anomaly. (`#615
+  <https://github.com/spacetelescope/roman_datamodels/issues/615>`_)
+
+
+Misc
+----
+
+- Update numpy and asdf-astropy dependency versions. (`#619
+  <https://github.com/spacetelescope/roman_datamodels/issues/619>`_)
+
+
 0.29.0 (2025-12-18)
 ===================
 
