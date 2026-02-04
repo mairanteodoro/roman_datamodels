@@ -4,3 +4,4 @@ from ._datamodels import *  # noqa: F403
 # rename rdm_open to open to match the current roman_datamodels API
 from ._utils import FilenameMismatchWarning  # noqa: F401
 from ._utils import rdm_open as open  # noqa: F401
+from ._utils import create_synchronized_table  # noqa: F401
