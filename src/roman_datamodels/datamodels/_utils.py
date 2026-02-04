@@ -25,12 +25,12 @@ if TYPE_CHECKING:
 
 __all__ = [
     "FilenameMismatchWarning",
+    "create_synchronized_table",
     "node_update",
+    "parse_units_to_ivoa",
     "rdm_open",
     "temporary_update_filedate",
     "temporary_update_filename",
-    "parse_units_to_ivoa",
-    "create_synchronized_table",
 ]
 
 
@@ -392,9 +392,9 @@ def create_synchronized_table(
     pyarrow.Table
         A PyArrow Table with synchronized field-level unit metadata and Astropy YAML metadata embedded in the schema.
     """
+    import astropy.table.meta
     import pyarrow as pa
     from astropy.table import Table
-    import astropy.table.meta
 
     # Determine final units to use
     if ivoa_compliant:

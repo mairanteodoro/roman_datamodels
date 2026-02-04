@@ -2,17 +2,18 @@
 Unit tests for IVOA-compliant unit conversion and Parquet export functionality.
 """
 
-import numpy as np
-import pytest
-import tempfile
 import pathlib
-from astropy.table import Table
-from astropy import units as u
+import tempfile
+
+import numpy as np
 import pyarrow.parquet as pq
+import pytest
+from astropy import units as u
+from astropy.table import Table
 
 from roman_datamodels.datamodels._utils import (
-    parse_units_to_ivoa,
     create_synchronized_table,
+    parse_units_to_ivoa,
 )
 
 
@@ -60,9 +61,10 @@ class TestParseUnitsToIVOA:
     def test_mixed_units(self):
         """Test a realistic mix of unit types."""
         input_units = ["m/s", None, "mag", "erg/s", "", "invalid", "Jy"]
-        
+
         # Suppress warning for invalid unit
         import warnings
+
         with warnings.catch_warnings():
             warnings.simplefilter("ignore", UserWarning)
             result = parse_units_to_ivoa(input_units)

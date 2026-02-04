@@ -15,20 +15,17 @@ import logging
 import pathlib
 from collections import abc
 from typing import TYPE_CHECKING
-import warnings
 
-import astropy.table.meta
 import numpy as np
 from astropy import time as _time
 from astropy.modeling import models
 
 from ._core import DataModel
 from ._utils import (
+    create_synchronized_table,
     node_update,
     temporary_update_filedate,
     temporary_update_filename,
-    parse_units_to_ivoa,
-    create_synchronized_table,
 )
 
 if TYPE_CHECKING:
