@@ -387,7 +387,7 @@ class TestEdgeCases:
 
         # PyArrow should raise an error for mismatched array lengths
         with pytest.raises((ValueError, pa.lib.ArrowInvalid)):
-            table = create_synchronized_table(arrs, names, units, dtypes, global_meta=None)
+            create_synchronized_table(arrs, names, units, dtypes, global_meta=None)
 
     def test_special_characters_in_units(self):
         """Test handling of special characters in unit strings."""
