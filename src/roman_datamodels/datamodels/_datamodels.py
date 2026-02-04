@@ -152,7 +152,7 @@ class _ParquetMixin:
         keys = list(source_cat.columns.keys())
         arrs = [np.array(source_cat[key]) for key in keys]
         units = [str(source_cat[key].unit) for key in keys]
-        descriptions = [getattr(source_cat[key], "description", None) for key in keys]
+        descriptions = [getattr(source_cat[key], "description", "") for key in keys]
         dtypes = [DTYPE_MAP[np.array(source_cat[key]).dtype.name] for key in keys]
         table = create_synchronized_table(
             arrs,
