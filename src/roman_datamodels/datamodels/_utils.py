@@ -18,10 +18,6 @@ from astropy import time
 from roman_datamodels._stnode import TaggedScalarNode
 
 from ._core import MODEL_REGISTRY, DataModel
-import pyarrow as pa
-from astropy.table import Table
-import astropy.table.meta
-from astropy import units as u
 
 if TYPE_CHECKING:
     from roman_datamodels._stnode import DNode, LNode
@@ -330,6 +326,8 @@ def parse_units_to_ivoa(unit_strings: list[str]) -> list[str]:
     list of str
         List of IVOA-compliant unit strings. Dimensionless or unrecognized units are mapped to "1".
     """
+    from astropy import units as u
+
     ivoa_list: list[str] = []
     for s in unit_strings:
         # Standardize dimensionless/null inputs to IVOA "1"
@@ -346,8 +344,10 @@ def parse_units_to_ivoa(unit_strings: list[str]) -> list[str]:
                     ivoa_list.append(unit_str)
             else:
                 ivoa_list.append(unit_obj.to_string(format="vounit", deprecations="convert"))
-        except Exception:
-            # Fallback to "1" if parsing fails to maintain standard
+        except Exception as e:
+            warnings.warn(
+                f"Could not parse unit '{s}' to IVOA format: {e}. Using dimensionless unit '1'.", UserWarning, stacklevel=2
+            )
             ivoa_list.append("1")
 
     return ivoa_list
@@ -392,6 +392,9 @@ def create_synchronized_table(
     pyarrow.Table
         A PyArrow Table with synchronized field-level unit metadata and Astropy YAML metadata embedded in the schema.
     """
+    import pyarrow as pa
+    from astropy.table import Table
+    import astropy.table.meta
 
     # Determine final units to use
     if ivoa_compliant:
