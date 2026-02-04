@@ -135,7 +135,8 @@ class _ParquetMixin:
 
         with temporary_update_filename(self, pathlib.Path(filepath).name), temporary_update_filedate(self, _time.Time.now()):  # type: ignore[arg-type]
             # Construct flat metadata dict
-            flat_meta = self.to_flat_dict()  # type: ignore[arg-defined]
+            flat_meta = self.to_flat_dict()  # type: ignore[attr-defined]
+
         # select only meta items
         flat_meta = {k: str(v) for (k, v) in flat_meta.items() if k.startswith("roman.meta")}
         # Extract table metadata
