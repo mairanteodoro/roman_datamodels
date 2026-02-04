@@ -109,7 +109,7 @@ class _ParquetMixin:
         from roman_datamodels._stnode import DNode
 
         # parquet does not provide validation so validate first with asdf
-        self.validate()
+        self.validate()  # type: ignore[attr-defined]
 
         global DTYPE_MAP
         import pyarrow as pa
@@ -133,13 +133,13 @@ class _ParquetMixin:
                 }
             )
 
-        with temporary_update_filename(self, pathlib.Path(filepath).name), temporary_update_filedate(self, _time.Time.now()):
+        with temporary_update_filename(self, pathlib.Path(filepath).name), temporary_update_filedate(self, _time.Time.now()):  # type: ignore[arg-type]
             # Construct flat metadata dict
-            flat_meta = self.to_flat_dict()
+            flat_meta = self.to_flat_dict()  # type: ignore[arg-type]
         # select only meta items
         flat_meta = {k: str(v) for (k, v) in flat_meta.items() if k.startswith("roman.meta")}
         # Extract table metadata
-        source_cat = self.source_catalog
+        source_cat = self.source_catalog  # type: ignore[attr-defined]
         scmeta = source_cat.meta
         # Wrap it as a DNode so it can be flattened
         dn_scmeta = DNode(scmeta)
