@@ -1,1 +1,0 @@
-Remove ``err`` array assignment to output ``RampModel`` in ``from_science_raw``.

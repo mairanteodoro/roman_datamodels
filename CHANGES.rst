@@ -1,3 +1,14 @@
+0.30.0 (2026-02-13)
+===================
+
+Deprecations and Removals
+-------------------------
+
+- Remove ``err`` array assignment to output ``RampModel`` in
+  ``from_science_raw``. (`#620
+  <https://github.com/spacetelescope/roman_datamodels/issues/620>`_)
+
+
 0.29.1 (2026-01-21)
 ===================
 
