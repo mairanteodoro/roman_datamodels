@@ -78,6 +78,29 @@ class _SourceCatalogMixin:
     def get_column_definition(self, name):
         return self._instance.get_column_definition(name)
 
+    def get_roman_photoz_column_definition(self, name):
+        """
+        Get the definition of a named column from the roman_photoz schema.
+
+        This function parses the "definitions" part of the roman_photoz
+        schema and returns the parsed content.
+
+        Parameters
+        ----------
+        name: str
+            Column name (e.g., "photoz", "photoz_gof", "photoz_high68").
+
+        Returns
+        -------
+        dict or None
+            Dictionary containing unit, description, and datatype information
+            or None if the name does not match any definition.
+        """
+        # Only MultibandSourceCatalogModel has this method
+        if hasattr(self._instance, 'get_roman_photoz_column_definition'):
+            return self._instance.get_roman_photoz_column_definition(name)
+        return None
+
 
 class _ParquetMixin:
     """Gives SourceCatalogModels the ability to save to parquet files."""

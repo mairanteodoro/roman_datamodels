@@ -304,3 +304,34 @@ class ForcedMosaicSourceCatalogMixin(ImageSourceCatalogMixin):
 
 class MultibandSourceCatalogMixin(ImageSourceCatalogMixin):
     __slots__ = ()
+
+    def get_roman_photoz_column_definition(self, name):
+        """
+        Get the definition of a named column in the roman_photoz table.
+
+        This function parses the "definitions" part of the roman_photoz
+        schema and returns the parsed content.
+
+        Parameters
+        ----------
+        name: str
+            Column name, may be prefixed with ``forced_``.
+
+        Returns
+        -------
+        dict or None
+            Dictionary containing unit, description, and datatype information
+            or None if the name does not match any definition.
+        """
+        if name.startswith("forced_"):
+            _, name = name.split("forced_", maxsplit=1)
+        definitions = _get_keyword(self.get_schema()["properties"]["roman_photoz"], "definitions")
+        for def_name, definition in definitions.items():
+            if def_name == name:
+                return {
+                    "unit": definition["unit"],
+                    "description": definition["description"],
+                    "datatype": asdf_datatype_to_numpy_dtype(
+                        definition["properties"]["data"]["properties"]["datatype"]["enum"][0]
+                    ),
+                }
