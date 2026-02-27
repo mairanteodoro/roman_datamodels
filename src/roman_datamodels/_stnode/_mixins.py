@@ -261,6 +261,8 @@ class ImageSourceCatalogMixin(_ObjectBase):
         for raw_col_def in dict(_get_properties(table_schema))["columns"]["allOf"]:
             col_def = raw_col_def["not"]["items"]["not"]
             properties = dict(_get_properties(col_def))
+            if "name" not in properties:
+                continue  # skip optional columns that don't have a name pattern
             name_regex = properties["name"]["pattern"]
             unit = _get_keyword(col_def, "unit")
             description = _get_keyword(col_def, "description")
