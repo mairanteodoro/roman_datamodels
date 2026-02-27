@@ -325,7 +325,7 @@ class MultibandSourceCatalogMixin(ImageSourceCatalogMixin):
         """
         if name.startswith("forced_"):
             _, name = name.split("forced_", maxsplit=1)
-        definitions = _get_keyword(self.get_schema()["properties"]["roman_photoz"], "definitions")
+        definitions = _get_keyword(self.get_schema()["properties"]["source_catalog"], "definitions")
         for def_name, definition in definitions.items():
             if def_name == name:
                 return {
